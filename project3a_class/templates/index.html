@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Stock Data Analyzer</title>
+</head>
+
+
+
+<body>
+   <h1>Stock Data Analyzer</h1>
+   <form method = "post">
+    <label for="symbol">Choose Symbol:</label>
+    <select id="symbol" name="symbol">
+        <!-- Add options for symbols -->
+        {% for symbol in symbols_list %}
+        <option value="{{ symbol }}">{{ symbol }}</option>
+        {% endfor %}
+        <!-- Add more options as needed -->
+    </select>
+
+    <br>
+
+    <label for="chartType">Choose Chart Type:</label>
+    <select id="chartType" name="chartType">
+        <!-- Add options for chart types -->
+        <option value="line">Line Chart</option>
+        <option value="bar">Bar Chart</option>
+        <!-- Add more options as needed -->
+    </select>
+
+    <br>
+
+    <label for="timeSeries">Choose Time Series:</label>
+    <select id="timeSeries" name="timeSeries">
+        <!-- Add options for time series -->
+        <option value="1">Intraday</option>
+        <option value="2">Daily</option>
+        <option value="3">Weekly</option>
+        <option value="4">Monthly</option>
+        <!-- Add more options as needed -->
+    </select>
+
+    <br>
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate">
+
+    <br>
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="endDate">
+
+    <br>
+
+    <input type="submit" value="Submit">
+</form>
+<div class ="container">
+    {% if  chart_picture  != None %}
+    <embed type="image/svg+xml" src={{chart_picture | safe }} style="max-width:1000px"/>
+    {% endif %}
+    {% if error != None %}
+    <p>The chart is too large! Try narrowing the date range or changing the time series.</p>
+    {% endif %}
+</div>
+</body>
+</html>
